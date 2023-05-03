@@ -1,5 +1,11 @@
+console.log('Loading modifyShapeDataPlugin...');
+
 Draw.loadPlugin(function (ui) {
+    console.log('Inside Draw.loadPlugin...');
+
     function createPanel(ui) {
+        console.log('Inside createPanel...');
+
         const div = document.createElement('div');
         div.style.padding = '4px';
 
@@ -18,6 +24,7 @@ Draw.loadPlugin(function (ui) {
         const applyChangesButton = div.querySelector('#applyChanges');
 
         applyChangesButton.addEventListener('click', function () {
+            console.log('Apply Changes button clicked...');
             const shapeLabel = div.querySelector('#shapeLabel').value;
             const customProperty = div.querySelector('#customProperty').value;
             const selectedCell = ui.editor.graph.getSelectionCell();
@@ -31,6 +38,7 @@ Draw.loadPlugin(function (ui) {
     }
 
     function updateShapeData(shape, label, customProperty) {
+        console.log('Inside updateShapeData...');
         if (shape) {
             // Update the shape's label
             shape.setValue(label);
@@ -51,6 +59,7 @@ Draw.loadPlugin(function (ui) {
 
     // Listen for shape selection events
     ui.editor.graph.getSelectionModel().addListener(mxEvent.CHANGE, function (sender, evt) {
+        console.log('Shape selection event...');
         const selectedCell = ui.editor.graph.getSelectionCell();
 
         if (selectedCell && selectedCell.isVertex()) {
@@ -61,4 +70,6 @@ Draw.loadPlugin(function (ui) {
             customProperty.value = selectedCell.customProperties?.property || '';
         }
     });
+
+    console.log('modifyShapeDataPlugin loaded successfully');
 });
